@@ -41,29 +41,3 @@ resource "aws_lambda_permission" "lambda-permission" {
   principal = "apigateway.amazonaws.com"
   source_arn = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:${var.aws_api_gateway_rest_api}/*/${aws_api_gateway_integration.integration.integration_http_method}${var.aws_api_gateway_resource_path}"
 }
-
-// IAM
-resource "aws_iam_role" "IamForLambdaFunction" {
-  name = "${var.environment_name}iam_for_${var.aws_lambda_function_name}_lambda"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy" "IamForLambda" {
-  name = "${var.environment_name}IamFor${var.aws_lambda_function_name}Lambda"
-  role = "${aws_iam_role.IamForLambdaFunction.id}"
-  policy = "${var.aws_iam_policy_document_json}"
-}

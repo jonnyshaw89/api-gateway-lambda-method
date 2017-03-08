@@ -11,7 +11,6 @@ module "ApiGatewayLambda" {
   aws_api_gateway_resource_path = ""
   aws_lambda_function_arn = ""
   aws_lambda_function_name = ""
-  aws_iam_policy_document_json = ""
   aws_region = ""
   aws_account_id = ""
   environment_name = ""
