@@ -1,3 +1,4 @@
+variable "aws_api_gateway_method_http_method" {}
 variable "aws_api_gateway_rest_api" {}
 variable "aws_api_gateway_resource_id" {}
 variable "aws_api_gateway_resource_path" {}
