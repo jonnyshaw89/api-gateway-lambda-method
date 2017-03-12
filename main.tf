@@ -3,7 +3,7 @@ resource "aws_api_gateway_method" "method" {
   rest_api_id = "${var.aws_api_gateway_rest_api}"
   resource_id = "${var.aws_api_gateway_resource_id}"
   http_method = "${var.aws_api_gateway_method_http_method}"
-  authorization = "AWS_IAM"
+  authorization = "${var.aws_api_gateway_method_authorization}"
 }
 
 resource "aws_api_gateway_integration" "integration" {
