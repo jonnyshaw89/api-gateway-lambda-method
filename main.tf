@@ -29,7 +29,7 @@ resource "aws_api_gateway_integration_response" "method-Integration-Response" {
   depends_on = ["aws_api_gateway_method.method", "aws_api_gateway_method_response.method-response", "aws_api_gateway_integration.integration"]
   rest_api_id = "${var.aws_api_gateway_rest_api}"
   resource_id = "${var.aws_api_gateway_resource_id}"
-  http_method = "${aws_api_gateway_integration.integration.integration_http_method}"
+  http_method = "POST"
   status_code = "${aws_api_gateway_method_response.method-response.status_code}"
   content_handling = "CONVERT_TO_TEXT"
 }
