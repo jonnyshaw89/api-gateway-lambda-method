@@ -31,6 +31,7 @@ resource "aws_api_gateway_integration_response" "method-Integration-Response" {
   resource_id = "${var.aws_api_gateway_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "${aws_api_gateway_method_response.method-response.status_code}"
+  content_handling = "CONVERT_TO_TEXT"
 }
 
 // Lambda
