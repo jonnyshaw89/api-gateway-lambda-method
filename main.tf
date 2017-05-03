@@ -3,7 +3,7 @@ resource "aws_api_gateway_method" "method" {
   rest_api_id = "${var.aws_api_gateway_rest_api}"
   resource_id = "${var.aws_api_gateway_resource_id}"
   http_method = "${var.aws_api_gateway_method_http_method}"
-  authorization = "AWS_IAM"
+  authorization = "${var.aws_api_gateway_method_authorization}"
 }
 
 resource "aws_api_gateway_integration" "integration" {
@@ -31,6 +31,7 @@ resource "aws_api_gateway_integration_response" "method-Integration-Response" {
   resource_id = "${var.aws_api_gateway_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "${aws_api_gateway_method_response.method-response.status_code}"
+  content_handling = "CONVERT_TO_TEXT"
 }
 
 // Lambda
@@ -39,5 +40,5 @@ resource "aws_lambda_permission" "lambda-permission" {
   statement_id = "Allow${var.aws_lambda_function_name}ExecutionFromApiGateway"
   action = "lambda:InvokeFunction"
   principal = "apigateway.amazonaws.com"
-  source_arn = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:${var.aws_api_gateway_rest_api}/*/${aws_api_gateway_integration.integration.integration_http_method}${var.aws_api_gateway_resource_path}"
+  source_arn = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:${var.aws_api_gateway_rest_api}/*/${aws_api_gateway_method.method.http_method}${var.aws_api_gateway_resource_path}"
 }
