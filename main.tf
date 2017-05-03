@@ -22,7 +22,7 @@ resource "aws_api_gateway_method_response" "method-response" {
   resource_id = "${var.aws_api_gateway_resource_id}"
   http_method = "${aws_api_gateway_method.method.http_method}"
   status_code = "200"
-  response_parameters = { "method.response.header.Access-Control-Allow-Origin" = "*" }
+  response_parameters = { "method.response.header.Access-Control-Allow-Origin" = true }
 }
 
 resource "aws_api_gateway_integration_response" "method-Integration-Response" {
